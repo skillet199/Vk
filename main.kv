@@ -1,0 +1,182 @@
+
+MDBoxLayout:
+    orientation: "vertical"
+
+    MDTopAppBar:
+        title: "VKS by sarmat"
+
+    MDTabs:
+        id: tabs
+        on_tab_switch:app.on_tab_switch(*args)
+        
+        Tab:
+            title:"Авторизация"
+            icon: "vk"
+            GridLayout:
+                rows: 2
+                padding: dp(40)
+                MDTextField:
+                    id: vk_token
+                    hint_text: "Введите токен Вконтакте"
+                    mode: "rectangle"
+
+                MDTextField:
+                    id:anti_token
+                    hint_text: "Введите anticaptcha токен "
+                    mode: "rectangle"
+                
+            MDFillRoundFlatIconButton:
+                
+                text: "Авторизоваться"
+                icon:"account"
+                pos_hint : {"center_x":.5}
+                on_release:
+                    app.auth()
+            MDLabel:
+                id: auth_label
+                text:""
+                halign: "center"
+        Tab:
+            title:"Спам в ЛС"
+            icon: "target-account"
+            GridLayout:
+                rows: 3
+                padding: dp(40)
+                MDTextField:
+                    id: ls_id
+                    hint_text: "id пользователя"
+                    mode: "rectangle"
+                MDTextField:
+                    id: ls_time
+                    hint_text: "Задержка"
+                    mode: "rectangle"           
+                MDTextField:
+                    id : ls_obr
+                    hint_text: "Обращение"
+                    mode: "rectangle"
+            
+            MDFillRoundFlatIconButton:
+                
+                text: "Начать"
+                icon:"play"
+                pos_hint : {"center_x":.5}
+                on_release:
+                    app.start_ls()
+            MDLabel:
+                id: ls_lab
+                text:""
+                halign: "center"
+        Tab:
+            
+            title:"Спам в беседу"
+            icon: "account-group"
+            GridLayout:
+                rows: 3
+                padding: dp(40)
+                MDTextField:
+                    id:group_id
+                    hint_text: "id беседы"
+                    mode: "rectangle"
+                MDTextField:
+                    id: group_time
+                    hint_text: "Задержка"
+                    mode: "rectangle"           
+                MDTextField:
+                    id: group_obr
+                    hint_text: "Обращение"
+                    mode: "rectangle"
+            
+            MDFillRoundFlatIconButton:
+                
+                text: "Начать"
+                icon:"play"
+                pos_hint : {"center_x":.5}
+                on_release:
+                    app.start_group()
+            MDLabel:
+                id: group_lab
+                text:""
+                halign: "center"
+        Tab:
+
+            icon: "book-edit"
+            title: "Редактор текстов"
+            GridLayout:
+                cols: 2
+                padding: dp(20)
+                spacing : dp(35)
+                MDTextField:
+                    id: spam_ls
+                    hint_text: "Текст для ЛС"
+                    mode: "rectangle"
+                    multiline: True
+                MDTextField:
+                    id : spam_group
+                    hint_text: "Текст для беседы"
+                    mode: "rectangle"           
+                    multiline: True
+            
+            MDFillRoundFlatIconButton:
+                id: start_button
+                text: "Записать"
+                icon:"clipboard-edit"
+                pos_hint : {"center_x":.5}
+                on_release: 
+                    app.write_text()
+                    self.text= "Записано"
+        Tab:
+            title:"Настройки"
+            icon: "tools"
+            GridLayout:
+                cols: 2
+                padding: dp(20)
+                spacing : dp(35)
+                pos_hint : {"center_x":.5}
+                MDRectangleFlatButton:
+                    text: "Синяя тема"
+                    text_color: 0, 0, 1, 1
+                    md_bg_color: 1, 1, 0, 1
+                    on_release: 
+                        app.theme_cls.primary_palette = "Blue"
+                        app.change_theme("Blue")
+                MDRectangleFlatButton:
+                    text: "Красная тема"
+                    text_color: 1, 0, 0, 1
+                    md_bg_color: 1, 1, 0, 1
+                    on_release:
+                        app.theme_cls.primary_palette = "Red"
+                        app.change_theme("Red")
+                MDRectangleFlatButton:
+                    text: "Зеленая тема"
+                    text_color: 0, 1, 0, 1
+                    md_bg_color: 1, 1, 0, 1   
+                    on_release: 
+                        app.theme_cls.primary_palette = "Green"
+                        app.change_theme("Green")
+                MDRectangleFlatButton:
+                    text: "Фиолетовая тема"
+                    text_color: "#8B00FF"
+                    md_bg_color: 1, 1, 0, 1   
+                    on_release: 
+                        app.theme_cls.primary_palette = "Purple"
+                        app.change_theme("Purple")
+                MDRectangleFlatButton:
+                    text: "Голубая тема"
+                    text_color: "#00ffff"
+                    md_bg_color: 1, 1, 0, 1   
+                    on_release: 
+                        app.theme_cls.primary_palette = "Cyan"
+                        app.change_theme("Cyan")
+                MDRectangleFlatButton:
+                    text: "Розовая тема"
+                    text_color: "#FFCBDB"
+                    md_bg_color: 1, 1, 0, 1   
+                    on_release:
+                        app.theme_cls.primary_palette = "Pink"
+                        app.change_theme("Pink")
+                
+            MDLabel:
+                markup: True
+                text: "\nПолучить токен Вконтакте можно тут:\n[u]vkhost.github.io[/u]\n[b]Разработчик[/b]: [u]vk.com/sudoreboot[/u]\n[b]СЕО[/b]: [u]Sarmat[/u]\n[i]2022[/i]"
+                halign: "center"
+                        
